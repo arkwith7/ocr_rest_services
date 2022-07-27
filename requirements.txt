@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+gunicorn
+requests
+pytest
+pre-commit
+opencv-python==4.5.5.64
+Pillow
+Image
+matplotlib
+python-multipart
