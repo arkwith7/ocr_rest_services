@@ -8,7 +8,7 @@ This small repository helps wrapping the EasyOCR functionalities inside Restful 
 
 - Method: `POST`
 
-- URL: `http://{server-ip}:2000/ocr`
+- URL: `http://{server-ip}:8080/ocr`
 
 - Header: 
 
