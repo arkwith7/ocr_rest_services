@@ -1,5 +1,7 @@
 FROM python:3.8-slim
 
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
 COPY . /app
 WORKDIR /app
 
@@ -44,11 +46,12 @@ RUN mkdir "$service_home" \
 
 # Create a virtual environment in /opt
 RUN python3 -m venv /opt/venv
+RUN source /opt/venv/bin/activate
 
 # Build
 RUN cd "$service_home" \
-    && /opt/venv/bin/python setup.py build_ext --inplace -j 4 \
-    && /opt/venv/bin/python -m pip install -e .
+    && python setup.py build_ext --inplace -j 4 \
+    && python -m pip install -e .
 
 # purge unused
 RUN apt-get remove -y --purge make gcc build-essential \
@@ -57,7 +60,7 @@ RUN apt-get remove -y --purge make gcc build-essential \
 
 
 # Install requirments to new virtual environment
-RUN /opt/venv/bin/pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
 
 # make entrypoint.sh executable
